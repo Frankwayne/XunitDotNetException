@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+         
+  <PropertyGroup>
+    <TargetFramework>net47</TargetFramework>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <UserSecretsId>c426f381-04f7-4ed4-865a-aa1e40370cd5</UserSecretsId>
+  </PropertyGroup>
+         
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleApp1Data\ConsoleApp1Data.csproj" />
+  </ItemGroup>
+         
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+         
+</Project>

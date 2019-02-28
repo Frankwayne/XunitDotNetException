@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <!-- Code coverage causing trouble in the build right now. -->
+    <!--<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0" ExcludeAssets="all" />-->
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Product>Product SDK</Product>
+    <Company>Company,Inc.</Company>
+    <Copyright>Copyright © Company,Inc.  All Rights Reserved.</Copyright>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+       
+    <!--<CodeAnalysisCulture>en-US</CodeAnalysisCulture>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)CsgDefault.ruleset</CodeAnalysisRuleSet>-->
+      
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BuildNumber)' == ''">
+    <BuildNumber>0</BuildNumber>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- https://github.com/Microsoft/vstest-docs/blob/master/docs/analyze.md#coverage -->
+    <!-- Required in both test/product projects. This is a temporary workaround for https://github.com/Microsoft/vstest/issues/800 -->
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <_IsFullFramework>true</_IsFullFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard')) Or $(TargetFramework.StartsWith('netcoreapp'))">
+      <_IsFullFramework>false</_IsFullFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration)=='Release'">
+    <!-- Disable code analysis for the .NET standard. Fails with unknown framework version.-->
+    <RunCodeAnalysis Condition="'$(_IsFullFramework)'=='false'">false</RunCodeAnalysis>
+  </PropertyGroup>
+  
+</Project>

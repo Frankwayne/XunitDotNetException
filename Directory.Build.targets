@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!--Set these properties in the target file after FileVersion is loaded from the project file.-->
+  <PropertyGroup Condition="$(FileVersion.LastIndexOf('.'))=='5'">
+    <FileVersion>$(FileVersion.Substring(0,6))$(BuildNumber)</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(FileVersion)==''">
+    <FileVersion>1.0.0.$(BuildNumber)</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(AssemblyVersion.LastIndexOf('.'))=='5'">
+    <AssemblyVersion>$(AssemblyVersion.Substring(0,6))$(BuildNumber)0</AssemblyVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(AssemblyVersion)==''">
+    <AssemblyVersion>1.0.0.$(BuildNumber)</AssemblyVersion>
+  </PropertyGroup>
+</Project>
